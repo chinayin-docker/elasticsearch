@@ -7,7 +7,7 @@
 ARG ES_VERSION=6.8.13
 FROM elasticsearch:${ES_VERSION}
 LABEL maintainer="chinayin <whereismoney@qq.com>" Version="6.8.13"
-ENV DEBIAN_FRONTEND=noninteractive FPM_IMAGE_VERSION="2020-12-19 00:42"
+ENV DEBIAN_FRONTEND=noninteractive FPM_IMAGE_VERSION="2020-12-20 15:58"
 
 ARG CHANGE_SOURCE=true
 ARG TIMEZONE=Asia/Shanghai
@@ -21,8 +21,10 @@ RUN set -eux \
     && yum -y update \
     ## alias
     && printf "alias ls='ls --color=auto'\nalias ll='ls -l --color=auto'\nalias l='ls -lA --color=auto'" >> /etc/profile.d/alias.sh \
+    && ln -s /usr/share/elasticsearch/config /etc/elasticsearch \
     ## set limits.conf
     && printf "* soft nofile 65536\n* hard nofile 65536" >> /etc/security/limits.conf \
+    && printf "elasticsearch soft memlock unlimited\nelasticsearch hard memlock unlimited" >> /etc/security/limits.conf \
     ## set sysctl.conf
     && printf "vm.max_map_count=262144" >> /etc/sysctl.conf \
     ## Install plugin
