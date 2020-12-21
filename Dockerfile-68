@@ -18,7 +18,7 @@ RUN if [ ${CHANGE_SOURCE} = true ]; then \
 
 ARG PLUGIN_VERSION=6.8.13
 RUN set -eux \
-    && yum -y update \
+    && yum update -y \
     ## alias
     && printf "alias ls='ls --color=auto'\nalias ll='ls -l --color=auto'\nalias l='ls -lA --color=auto'" >> /etc/profile.d/alias.sh \
     && ln -s /usr/share/elasticsearch/config /etc/elasticsearch \
@@ -33,3 +33,5 @@ RUN set -eux \
     && ./elasticsearch-plugin install -b "https://github.com/medcl/elasticsearch-analysis-pinyin/releases/download/v${PLUGIN_VERSION}/elasticsearch-analysis-pinyin-${PLUGIN_VERSION}.zip" \
     ## Clean up
     && yum clean all
+
+USER elasticsearch
