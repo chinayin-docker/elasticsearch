@@ -27,6 +27,7 @@ RUN set -eux \
     && printf "elasticsearch soft memlock unlimited\nelasticsearch hard memlock unlimited\n" >> /etc/security/limits.conf \
     ## set sysctl.conf
     && printf "vm.max_map_count=262144" >> /etc/sysctl.conf \
+    && printf "fs.file-max=65536" >> /etc/sysctl.conf \
     ## Install plugin
     && cd /usr/share/elasticsearch/bin \
     && ./elasticsearch-plugin install -b "https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v${PLUGIN_VERSION}/elasticsearch-analysis-ik-${PLUGIN_VERSION}.zip" \
