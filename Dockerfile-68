@@ -25,6 +25,7 @@ RUN set -eux \
     ## set limits.conf
     && printf "* soft nofile 65536\n* hard nofile 65536\n" >> /etc/security/limits.conf \
     && printf "elasticsearch soft memlock unlimited\nelasticsearch hard memlock unlimited\n" >> /etc/security/limits.conf \
+    && ulimit -l unlimited \
     ## set sysctl.conf
     && printf "vm.max_map_count=262144" >> /etc/sysctl.conf \
     ## Install plugin
