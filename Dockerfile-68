@@ -32,6 +32,7 @@ RUN set -eux \
     && cd /usr/share/elasticsearch/bin \
     && ./elasticsearch-plugin install -b "https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v${PLUGIN_VERSION}/elasticsearch-analysis-ik-${PLUGIN_VERSION}.zip" \
     && ./elasticsearch-plugin install -b "https://github.com/medcl/elasticsearch-analysis-pinyin/releases/download/v${PLUGIN_VERSION}/elasticsearch-analysis-pinyin-${PLUGIN_VERSION}.zip" \
+    && ./elasticsearch-plugin install -b "https://github.com/medcl/elasticsearch-analysis-stconvert/releases/download/v${PLUGIN_VERSION}/elasticsearch-analysis-stconvert-${PLUGIN_VERSION}.zip" \
     ## Clean up
     && yum clean all
 
