@@ -1,13 +1,12 @@
 #
 #--------------------------------------------------------------------------
-# Image Setup
+# elasticsearch 6.8
 #--------------------------------------------------------------------------
 #
 
 ARG ES_VERSION=6.8.14
 FROM elasticsearch:${ES_VERSION}
-LABEL maintainer="chinayin <whereismoney@qq.com>" Version="6.8.14"
-ENV DEBIAN_FRONTEND=noninteractive FPM_IMAGE_VERSION="2021-04-16 11:24"
+LABEL maintainer="chinayin <whereismoney@qq.com>"
 
 ARG CHANGE_SOURCE=true
 ARG TIMEZONE=Asia/Shanghai
@@ -16,7 +15,6 @@ RUN if [ ${CHANGE_SOURCE} = true ]; then \
     curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo \
 ;fi && cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && echo "${TIMEZONE}" > /etc/timezone;
 
-ARG PLUGIN_VERSION=6.8.14
 RUN set -eux \
     && yum update -y \
     ## alias
@@ -30,9 +28,9 @@ RUN set -eux \
     && printf "fs.file-max=65536" >> /etc/sysctl.conf \
     ## Install plugin
     && cd /usr/share/elasticsearch/bin \
-    && ./elasticsearch-plugin install -b "https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v${PLUGIN_VERSION}/elasticsearch-analysis-ik-${PLUGIN_VERSION}.zip" \
-    && ./elasticsearch-plugin install -b "https://github.com/medcl/elasticsearch-analysis-pinyin/releases/download/v${PLUGIN_VERSION}/elasticsearch-analysis-pinyin-${PLUGIN_VERSION}.zip" \
-    && ./elasticsearch-plugin install -b "https://github.com/medcl/elasticsearch-analysis-stconvert/releases/download/v${PLUGIN_VERSION}/elasticsearch-analysis-stconvert-${PLUGIN_VERSION}.zip" \
+    && ./elasticsearch-plugin install -b "https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v${ES_VERSION}/elasticsearch-analysis-ik-${ES_VERSION}.zip" \
+    && ./elasticsearch-plugin install -b "https://github.com/medcl/elasticsearch-analysis-pinyin/releases/download/v${ES_VERSION}/elasticsearch-analysis-pinyin-${ES_VERSION}.zip" \
+    && ./elasticsearch-plugin install -b "https://github.com/medcl/elasticsearch-analysis-stconvert/releases/download/v${ES_VERSION}/elasticsearch-analysis-stconvert-${ES_VERSION}.zip" \
     ## Clean up
     && yum clean all
 
