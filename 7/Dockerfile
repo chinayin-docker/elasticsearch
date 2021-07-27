@@ -12,7 +12,7 @@ ARG CHANGE_SOURCE=true
 ARG TIMEZONE=Asia/Shanghai
 RUN if [ ${CHANGE_SOURCE} = true ]; then \
     mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo_bak && \
-    curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo \
+    curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-8.repo \
 ;fi && cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && echo "${TIMEZONE}" > /etc/timezone;
 
 ARG PLUGIN_VERSION=7.13.4
