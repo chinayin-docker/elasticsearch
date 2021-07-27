@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        major: [ 6 ]
+        major: [ 6,7 ]
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -35,6 +35,7 @@ jobs:
           context: ${{ steps.vars.outputs.workdir }}
           pull: true
           push: true
+          platforms: linux/amd64,linux/arm64
           tags: |
             ${{ steps.vars.outputs.repository }}:${{ matrix.major }}
             ${{ steps.vars.outputs.repository }}:${{ steps.vars.outputs.minor_version }}
