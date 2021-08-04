@@ -11,7 +11,7 @@ unexpected.
 
 ### Supported tags and respective `Dockerfile` links
 
-![](https://img.shields.io/docker/v/chinayin/elasticsearch/6)
+![](https://img.shields.io/docker/v/chinayin/elasticsearch/7)
 
 ### Image Variants
 
@@ -22,7 +22,7 @@ unexpected.
 You can use the image directly, e.g.
 
 ```
-docker run --rm -it chinayin/elasticsearch:6
+docker run --rm -it chinayin/elasticsearch:7
 ```
 
 The images are built daily and have the security release enabled, so will contain any security updates released more
@@ -31,5 +31,5 @@ than 24 hours ago.
 You can also use the images as a base for your own Dockerfile:
 
 ```
-FROM chinayin/elasticsearch:6
+FROM chinayin/elasticsearch:7
 ```
