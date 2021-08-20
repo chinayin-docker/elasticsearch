@@ -4,7 +4,7 @@
 #--------------------------------------------------------------------------
 #
 
-ARG ES_VERSION=6.8.14
+ARG ES_VERSION=6.8.16
 FROM elasticsearch:${ES_VERSION}
 LABEL maintainer="chinayin <whereismoney@qq.com>"
 
@@ -15,7 +15,7 @@ RUN if [ ${CHANGE_SOURCE} = true ]; then \
     curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo \
 ;fi && cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && echo "${TIMEZONE}" > /etc/timezone;
 
-ARG PLUGIN_VERSION=6.8.14
+ARG PLUGIN_VERSION=6.8.16
 RUN set -eux \
     && yum update -y \
     ## alias
