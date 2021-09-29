@@ -17,7 +17,7 @@ unexpected.
 
 - `elasticsearch:<version>`
 
-### Use Elasticsearch
+### Usage
 
 You can use the image directly, e.g.
 
