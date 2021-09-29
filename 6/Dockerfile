@@ -4,18 +4,20 @@
 #--------------------------------------------------------------------------
 #
 
-ARG ES_VERSION=6.8.16
+ARG ES_VERSION=6.8.19
 FROM elasticsearch:${ES_VERSION}
 LABEL maintainer="chinayin <whereismoney@qq.com>"
 
 ARG CHANGE_SOURCE=true
-ARG TIMEZONE=Asia/Shanghai
+ENV CHANGE_SOURCE ${CHANGE_SOURCE}
+ARG TZ=Asia/Shanghai
+ENV TZ ${TZ}
 RUN if [ ${CHANGE_SOURCE} = true ]; then \
     mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo_bak && \
     curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo \
-;fi && cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime && echo "${TIMEZONE}" > /etc/timezone;
+;fi && ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime && echo "${TZ}" > /etc/timezone; \
 
-ARG PLUGIN_VERSION=6.8.16
+ARG PLUGIN_VERSION=6.8.19
 RUN set -eux \
     && yum update -y \
     ## alias
