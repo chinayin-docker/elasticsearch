@@ -15,7 +15,7 @@ ENV TZ ${TZ}
 RUN if [ ${CHANGE_SOURCE} = true ]; then \
     mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo_bak && \
     curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo \
-;fi && ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime && echo "${TZ}" > /etc/timezone; \
+;fi && ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime && echo "${TZ}" > /etc/timezone;
 
 ARG PLUGIN_VERSION=6.8.18
 RUN set -eux \
