@@ -21,7 +21,7 @@ RUN if [ ${CHANGE_SOURCE} = true ]; then \
 ARG PLUGIN_VERSION=8.4.2
 RUN set -eux \
     ## alias
-    && printf "alias ls='ls --color=auto'\nalias ll='ls -l --color=auto'\nalias l='ls -lA --color=auto'" >> /etc/profile.d/alias.sh \
+    && printf "alias ls='ls --color=auto'\nalias ll='ls -l --color=auto'\nalias l='ls -lA --color=auto'" >> /etc/profile.d/ll.sh \
     && ln -s /usr/share/elasticsearch/config /etc/elasticsearch \
     ## set limits.conf
     && printf "* soft nofile 65536\n* hard nofile 65536\n" >> /etc/security/limits.conf \
