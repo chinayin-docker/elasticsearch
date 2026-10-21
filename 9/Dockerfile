@@ -1,25 +1,25 @@
 #
 #--------------------------------------------------------------------------
-# elasticsearch 6.8
+# elasticsearch 9.5.5
 #--------------------------------------------------------------------------
 #
 
-ARG ES_VERSION=6.8.23
+ARG ES_VERSION=9.5.5
 FROM elasticsearch:${ES_VERSION}
 LABEL maintainer="chinayin <whereismoney@qq.com>"
+
+USER root
 
 ARG CHANGE_SOURCE=true
 ENV CHANGE_SOURCE ${CHANGE_SOURCE}
 ARG TZ=Asia/Shanghai
 ENV TZ ${TZ}
 RUN if [ ${CHANGE_SOURCE} = true ]; then \
-    mv /etc/yum.repos.d/CentOS-Base.repo /etc/yum.repos.d/CentOS-Base.repo_bak && \
-    curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo \
-;fi && ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime && echo "${TZ}" > /etc/timezone;
+    echo 'change source' \
+;fi && ln -snf /usr/share/zoneinfo/${TZ} /etc/localtime && echo ${TZ} > /etc/timezone;
 
-ARG PLUGIN_VERSION=6.8.23
+ARG PLUGIN_VERSION=9.5.5
 RUN set -eux \
-    && yum update -y \
     ## alias
     && printf "alias ls='ls --color=auto'\nalias ll='ls -l --color=auto'\nalias l='ls -lA --color=auto'" >> /etc/profile.d/ll.sh \
     && ln -s /usr/share/elasticsearch/config /etc/elasticsearch \
@@ -30,10 +30,10 @@ RUN set -eux \
     && printf "vm.max_map_count=262144\nfs.file-max=65536" >> /etc/sysctl.conf \
     ## Install plugin
     && cd /usr/share/elasticsearch/bin \
-    && ./elasticsearch-plugin install -b "https://github.com/medcl/elasticsearch-analysis-ik/releases/download/v${PLUGIN_VERSION}/elasticsearch-analysis-ik-${PLUGIN_VERSION}.zip" \
-    && ./elasticsearch-plugin install -b "https://github.com/medcl/elasticsearch-analysis-pinyin/releases/download/v${PLUGIN_VERSION}/elasticsearch-analysis-pinyin-${PLUGIN_VERSION}.zip" \
-    && ./elasticsearch-plugin install -b "https://github.com/medcl/elasticsearch-analysis-stconvert/releases/download/v${PLUGIN_VERSION}/elasticsearch-analysis-stconvert-${PLUGIN_VERSION}.zip" \
+    && ./elasticsearch-plugin install -b "https://get.infini.cloud/elasticsearch/analysis-ik/${PLUGIN_VERSION}" \
+    && ./elasticsearch-plugin install -b "https://get.infini.cloud/elasticsearch/analysis-pinyin/${PLUGIN_VERSION}" \
+    && ./elasticsearch-plugin install -b "https://get.infini.cloud/elasticsearch/analysis-stconvert/${PLUGIN_VERSION}" \
     ## Clean up
-    && yum clean all
+    && echo 'end'
 
 USER elasticsearch

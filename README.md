@@ -22,7 +22,7 @@ unexpected.
 You can use the image directly, e.g.
 
 ```
-docker run --rm -it chinayin/elasticsearch:8
+docker run --rm -it chinayin/elasticsearch:9.5.5
 ```
 
 The images are built daily and have the security release enabled, so will contain any security updates released more
@@ -31,5 +31,5 @@ than 24 hours ago.
 You can also use the images as a base for your own Dockerfile:
 
 ```
-FROM chinayin/elasticsearch:8
+FROM chinayin/elasticsearch:9.5.5
 ```

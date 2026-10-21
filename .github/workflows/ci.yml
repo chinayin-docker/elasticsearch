@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        major: [ 7,8 ]
+        major: [ 7,8,9 ]
     steps:
       - name: Checkout code
         uses: actions/checkout@v7
